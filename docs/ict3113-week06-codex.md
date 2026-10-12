@@ -110,7 +110,7 @@ A required PR and a required approving review are different controls. Require an
 
 **Prompt — builder:**
 
-> Create a GitHub issue titled "Add a dark-mode toggle" with these acceptance criteria: a navigation button named "Toggle dark mode" toggles the dark class on body. The initial mode for a fresh browser session is light. The selected mode survives reload and same-tab navigation for that tab's session. A new browser session starts in light mode. Return the issue URL and number.
+> Create a GitHub issue titled "Add a dark-mode toggle" with these acceptance criteria: a navigation button named "Toggle dark mode" toggles the dark class on body. The initial mode for a fresh browser session is dark. The selected mode survives reload and same-tab navigation for that tab's session. A new browser session starts in dark mode. Return the issue URL and number.
 
 This makes "kept for the session" testable. Keep the original ambiguous wording in your notes if you want to discuss how it was clarified.
 
@@ -167,9 +167,9 @@ R4: On a successful repository response, repos displays a card for
 R5: An empty repository response displays a clear empty-state message.
 R6: A failed repository request displays a clear failure message.
 R7: A nav button named "Toggle dark mode" toggles the dark class on body.
-R8: A fresh browser session starts in light mode. The chosen mode survives
+R8: A fresh browser session starts in dark mode. The chosen mode survives
     reload and same-tab navigation for that tab's session. A new browser
-    session starts in light mode.
+    session starts in dark mode.
 ```
 
 Include the actual issue text and number. Clarify any conflict between the issue and SPEC before implementation or testing continues.

@@ -10,8 +10,8 @@
     toggle.setAttribute('aria-pressed', String(dark));
     document.querySelector('meta[name="theme-color"]').content = dark ? '#16221e' : '#f5f3ed';
   }
-  try { applyTheme(sessionStorage.getItem(storageKey) === 'true'); }
-  catch { applyTheme(false); }
+  try { applyTheme(sessionStorage.getItem(storageKey) !== 'false'); }
+  catch { applyTheme(true); }
   toggle.addEventListener('click', () => {
     const dark = !document.body.classList.contains('dark');
     applyTheme(dark);
