@@ -33,13 +33,13 @@ gh auth status
 
 If GitHub CLI is not authenticated, run `gh auth login` and complete the sign-in yourself. Check repository-local Git author settings before making commits; avoid changing global settings unnecessarily.
 
-**Updated repository check:** `origin` is configured as `https://github.com/Knight-RT/Ryan-Portfolio.git`, and local `main` tracks `origin/main`. Use `Knight-RT` for `<USER>` and `Ryan-Portfolio` for `<SITE_REPO>`. Both site and checker repositories are now public with Ryan's authorization. GitHub CLI (`gh`) is not on PATH in this session; use the GitHub browser interface or authenticated API for issues, PRs, and settings. Do not create duplicate repositories. The site also includes a dependency-free Node preview server, so Python is optional locally.
+**Updated repository check:** `origin` is configured as `https://github.com/Knight-RT/Knight-RT.github.io.git`, and local `main` tracks `origin/main`. Use `Knight-RT` for `<USER>` and `Knight-RT.github.io` for `<SITE_REPO>`. Both site and checker repositories are now public with Ryan's authorization. GitHub CLI (`gh`) is not on PATH in this session; use the GitHub browser interface or authenticated API for issues, PRs, and settings. Do not create duplicate repositories. The site also includes a dependency-free Node preview server, so Python is optional locally.
 
 **Prompt — builder:**
 
 > Inspect this existing repository, its branch, working tree, and remotes. Reuse it for this lab. If the GitHub remote is missing, ask me for the existing repository URL before configuring origin. Verify the repository owner, visibility, default branch, and authentication. Preserve existing files and changes. Report what is ready and what needs setup.
 
-In this guide, `<USER>` means the verified GitHub owner and `<SITE_REPO>` means the actual repository name, expected to be `Ryan-Portfolio`. Use public repositories for the original lab's cross-repository test arrangement. Verify visibility and hosting availability rather than changing visibility automatically.
+In this guide, `<USER>` means the verified GitHub owner and `<SITE_REPO>` means the actual repository name, now `Knight-RT.github.io`. Use public repositories for the original lab's cross-repository test arrangement. Verify visibility and hosting availability rather than changing visibility automatically.
 
 ### How to use this guide
 
@@ -63,7 +63,7 @@ Codex recognizes `AGENTS.md` as project instructions. Instructions can apply at 
 **Suggested builder `AGENTS.md`:**
 
 ```markdown
-# Ryan-Portfolio
+# Knight-RT.github.io
 Build a personal portfolio with plain HTML/CSS and small amounts of vanilla JS.
 Site files live in public/. No framework or build step.
 Sections: #hero #about #skills #projects #repos #contact.
@@ -126,13 +126,13 @@ This makes "kept for the session" testable. Keep the original ambiguous wording 
 
 ### 3.1 Start a fresh checker context
 
-Create a separate public `<SITE_REPO>-tests` repository and add its separate local folder as a Codex project. Start a new chat there. Do not fork the builder chat, use a builder worktree as the checker, attach implementation files, or paste builder diffs. A worktree separates file changes but still contains the site's source.
+Create a separate public `Ryan-Portfolio-tests` repository and add its separate local folder as a Codex project. Start a new chat there. Do not fork the builder chat, use a builder worktree as the checker, attach implementation files, or paste builder diffs. A worktree separates file changes but still contains the site's source.
 
 The checker receives only its role instructions, specification, issue text, and running-site URL. A fresh chat avoids inherited builder conversation context. This is a workflow boundary, not a security boundary: instructions alone cannot prevent access to source elsewhere on the machine or internet. For enforced isolation, restrict the checker's environment and filesystem access too.
 
 **Prompt — checker:**
 
-> Set up this separate public <SITE_REPO>-tests repository with AGENTS.md, SPEC.md, .gitignore, and README. You are the checker. Work only from the specification and issue text I supply; do not access the site's source repository, implementation files, diffs, or builder chat. You may interact with the running website in a browser. Do not edit the site. Ask about unclear acceptance criteria before inventing expectations.
+> Set up this separate public Ryan-Portfolio-tests repository with AGENTS.md, SPEC.md, .gitignore, and README. You are the checker. Work only from the specification and issue text I supply; do not access the site's source repository, implementation files, diffs, or builder chat. You may interact with the running website in a browser. Do not edit the site. Ask about unclear acceptance criteria before inventing expectations.
 
 **Suggested checker `AGENTS.md`:**
 
@@ -207,7 +207,7 @@ Set BASE_URL to the deployed project URL to test the live site. Keep its trailin
 
 **Prompt — builder:**
 
-> Prepare a PR adding .github/workflows/test.yml for pull_request events targeting main. Use a job named functional-tests with contents: read. Check out the PR site and the public <USER>/<SITE_REPO>-tests repository into checker/. Pin the checker to the reviewed full commit SHA I supply, so the expected tests do not change silently. Set up a supported Node LTS version and Python, run npm ci and install Playwright Chromium with its dependencies in checker/, serve public/ on port 8000, wait for a successful HTTP response with a bounded retry loop, and run npm test with BASE_URL=http://127.0.0.1:8000. Upload failure reports. Do not use pull_request_target or secrets for these browser tests. Open a PR and leave merging to me.
+> Prepare a PR adding .github/workflows/test.yml for pull_request events targeting main. Use a job named functional-tests with contents: read. Check out the PR site and the public <USER>/Ryan-Portfolio-tests repository into checker/. Pin the checker to the reviewed full commit SHA I supply, so the expected tests do not change silently. Set up a supported Node LTS version and Python, run npm ci and install Playwright Chromium with its dependencies in checker/, serve public/ on port 8000, wait for a successful HTTP response with a bounded retry loop, and run npm test with BASE_URL=http://127.0.0.1:8000. Upload failure reports. Do not use pull_request_target or secrets for these browser tests. Open a PR and leave merging to me.
 
 The builder may write CI plumbing, but you review the checker repository, its pinned revision, and the workflow. Separate test repositories do not prevent a builder PR from disabling a workflow or selecting different tests; human review remains essential.
 

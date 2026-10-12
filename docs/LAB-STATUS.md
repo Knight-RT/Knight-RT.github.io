@@ -25,9 +25,9 @@ contact with the label "Ask about this project" rather than invented source URLs
 Setup results and repository links will be appended after verification.
 
 ## Verified setup
-- Site: https://github.com/Knight-RT/Ryan-Portfolio (public with permission).
+- Site: https://github.com/Knight-RT/Knight-RT.github.io (public with permission).
 - Checker: https://github.com/Knight-RT/Ryan-Portfolio-tests (public).
-- Setup issue: https://github.com/Knight-RT/Ryan-Portfolio/issues/1.
+- Setup issue: https://github.com/Knight-RT/Knight-RT.github.io/issues/1.
 - Reviewed checker commit: 4f6bb59e0b8c6dce1732ecde013a9b4069593bfe.
 - Separate checker checkout: D:\Github\Portfolio\Ryan-Portfolio-tests. Add that
   folder as its own Codex project for future checker chats.
