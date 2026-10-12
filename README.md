@@ -3,11 +3,11 @@
 A responsive portfolio based on Ryan's résumé, built with plain HTML, CSS,
 and vanilla JavaScript for ICT3113 Week 06: Shipping with Agents.
 
-- [Site repository](https://github.com/Knight-RT/Ryan-Portfolio)
+- [Site repository](https://github.com/Knight-RT/Knight-RT.github.io)
 - [Independent checker](https://github.com/Knight-RT/Ryan-Portfolio-tests)
-- [Setup issue](https://github.com/Knight-RT/Ryan-Portfolio/issues/1)
-- Expected Pages URL after the first reviewed merge:
-  https://knight-rt.github.io/Ryan-Portfolio/
+- [Setup issue](https://github.com/Knight-RT/Knight-RT.github.io/issues/1)
+- Live Pages URL:
+  https://knight-rt.github.io/
 
 ## Run locally
 
@@ -55,7 +55,7 @@ npm test
 ```
 
 Run the site server in another terminal. BASE_URL can also point to the deployed
-Pages URL, including `/Ryan-Portfolio/`. The checker uses deterministic API
+Pages URL, `https://knight-rt.github.io/`. The checker uses deterministic API
 fixtures and does not read the site's source.
 
 ## Review and ship

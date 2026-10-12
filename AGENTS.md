@@ -1,4 +1,4 @@
-# Ryan-Portfolio
+# Knight-RT.github.io
 
 Personal portfolio for Knight-RT. Use plain HTML/CSS and small amounts of
 vanilla JavaScript. Site files live in public/. No framework or build step.
