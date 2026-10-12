@@ -1,0 +1,72 @@
+name: Functional tests
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: functional-tests-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  functional-tests:
+    name: functional-tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out proposed site
+        uses: actions/checkout@v4
+      - name: Check out reviewed independent checker
+        uses: actions/checkout@v4
+        with:
+          repository: Knight-RT/Ryan-Portfolio-tests
+          # Review SPEC.md and test changes before updating this immutable pin.
+          ref: 4f6bb59e0b8c6dce1732ecde013a9b4069593bfe
+          path: checker
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: checker/package-lock.json
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install checker and Chromium
+        working-directory: checker
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+      - name: Type-check checker
+        working-directory: checker
+        run: npx tsc --noEmit
+      - name: Serve proposed site and wait for readiness
+        shell: bash
+        run: |
+          python -m http.server 8000 --bind 127.0.0.1 --directory public > /tmp/portfolio-server.log 2>&1 &
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:8000/ > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/portfolio-server.log
+          exit 1
+      - name: Run independent functional tests
+        working-directory: checker
+        run: npm test
+        env:
+          BASE_URL: http://127.0.0.1:8000/
+      - name: Save test report and failure traces
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: independent-playwright-report
+          path: |
+            checker/playwright-report/
+            checker/test-results/
+          if-no-files-found: ignore
+          retention-days: 14
