@@ -1,89 +1,46 @@
 # Ryan Tan · Portfolio
 
-A responsive portfolio based on Ryan's résumé, built with plain HTML, CSS,
-and vanilla JavaScript for ICT3113 Week 06: Shipping with Agents.
+My personal portfolio, showcasing my background in software engineering,
+web development, and selected projects.
 
-- [Site repository](https://github.com/Knight-RT/Knight-RT.github.io)
-- [Independent checker](https://github.com/Knight-RT/Ryan-Portfolio-tests)
-- [Setup issue](https://github.com/Knight-RT/Knight-RT.github.io/issues/1)
-- Live Pages URL:
-  https://knight-rt.github.io/
+**[Visit the live portfolio →](https://knight-rt.github.io/)**
+
+## Features
+
+- Responsive layout for desktop and mobile.
+- Dark navy and light blue themes, with a remembered choice for each tab.
+- Education, experience, skills, and project highlights.
+- Public GitHub repositories loaded automatically, with empty and error states.
+- Accessible navigation and a back-to-top button.
+
+## Technologies
+
+HTML, CSS, and vanilla JavaScript. Hosted on GitHub Pages with automated
+deployment through GitHub Actions. No framework, site dependencies, or build
+step is required.
 
 ## Run locally
 
-Use Node.js 22 or later. No site dependencies or build step are needed.
+With Node.js 22 or later:
 
-```powershell
-node scripts/serve.mjs
+```sh
+git clone https://github.com/Knight-RT/Knight-RT.github.io.git
+cd Knight-RT.github.io
+npm start
 ```
 
-Open http://127.0.0.1:8000. `npm start` is equivalent when npm is installed.
-Stop with Ctrl+C. Python is an alternative:
+Open [http://127.0.0.1:8000](http://127.0.0.1:8000). You can also start the server
+directly with `node scripts/serve.mjs`.
 
-```powershell
-python -m http.server 8000 --bind 127.0.0.1 --directory public
-```
+## Content and maintenance
 
-## Edit content
+Personal details and project highlights are maintained in `public/profile.js`.
+The page structure, styling, and interactions live in `public/index.html`,
+`public/styles.css`, and `public/app.js`.
 
-Update `public/profile.js` for biography, links, skills, education, experience,
-and projects. Content is based on the supplied résumé; the résumé PDF itself is
-not copied into this repository. Highlights with no public source URL use an
-honest "Ask about this project" contact link. Replace those links when source
-repositories or public demos become available.
+Independent [Playwright tests](https://github.com/Knight-RT/Ryan-Portfolio-tests)
+check the site’s behaviour on pull requests. Passing checks are required before
+merging; updates to `main` deploy automatically to GitHub Pages.
 
-`public/index.html` defines the six sections; `styles.css` defines the responsive
-layout. `app.js` renders the profile and GitHub cards, manages a tab-session
-dark mode (dark by default in a fresh session), and shows back-to-top once the hero has scrolled out of view.
-
-GitHub requests are unauthenticated; failures, empty responses, and nullable
-repository fields have separate states. Dynamic text uses DOM textContent.
-Google Fonts is optional: the CSS includes local fallback font stacks.
-
-## Run the independent tests
-
-Clone the checker into a separate folder outside this site checkout. Keep its
-Codex chat separate and give it only SPEC.md, issue text, and a running URL.
-
-```powershell
-git clone https://github.com/Knight-RT/Ryan-Portfolio-tests.git
-cd Ryan-Portfolio-tests
-npm ci
-npx playwright install chromium
-$env:BASE_URL = 'http://127.0.0.1:8000'
-npm test
-```
-
-Run the site server in another terminal. BASE_URL can also point to the deployed
-Pages URL, `https://knight-rt.github.io/`. The checker uses deterministic API
-fixtures and does not read the site's source.
-
-## Review and ship
-
-1. Open an issue with observable acceptance criteria.
-2. Work on a `codex/` branch and open a PR closing the issue.
-3. Review the diff, independent test results, and browser behaviour.
-4. The human decides to merge. Main requires a PR and passing `functional-tests`.
-5. A push to main deploys only `public/` through GitHub Pages Actions.
-
-The test workflow pins the checker repository to a reviewed commit SHA. Review
-updates to that SHA and workflow changes explicitly. New tests do not enter CI
-until the pin is updated. Workflow source and selected tests remain part of the
-human review; separate repositories do not make them tamper-proof.
-
-The main ruleset has no bypass actors, blocks deletion/force push, and requires
-the functional check with an up-to-date branch. Required approving reviews are
-zero because a sole contributor cannot approve their own PR; the manual human
-review is a process gate. Add an eligible independent reviewer and require an
-approval if you want GitHub to enforce that additional gate.
-
-## Lab material
-
-- [Codex lab guide](docs/ict3113-week06-codex.md)
-- [Setup evidence and reflection prompts](docs/LAB-STATUS.md)
-- Project guidance: AGENTS.md. Guidance shapes behaviour; GitHub rules and CI
-  enforce the merge requirements.
-
-Generated local tools, checker checkout, browser cache, and reports are ignored.
-They are not part of the deployed site or the site repository's commits.
-
+This project began as an ICT3113 lab. The [lab guide](docs/ict3113-week06-codex.md)
+and [setup notes](docs/LAB-STATUS.md) are kept in `docs/`.
