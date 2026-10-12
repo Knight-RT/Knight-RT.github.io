@@ -1,0 +1,11 @@
+{
+  "name": "ryan-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Ryan Tan's static portfolio and ICT3113 shipping workflow",
+  "scripts": {
+    "start": "node scripts/serve.mjs",
+    "dev": "node scripts/serve.mjs"
+  },
+  "engines": { "node": ">=22" }
+}
