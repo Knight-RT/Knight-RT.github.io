@@ -8,7 +8,7 @@
   function applyTheme(dark) {
     document.body.classList.toggle('dark', dark);
     toggle.setAttribute('aria-pressed', String(dark));
-    document.querySelector('meta[name="theme-color"]').content = dark ? '#16221e' : '#f5f3ed';
+    document.querySelector('meta[name="theme-color"]').content = dark ? '#0b162b' : '#f2f6fc';
   }
   try { applyTheme(sessionStorage.getItem(storageKey) !== 'false'); }
   catch { applyTheme(true); }
