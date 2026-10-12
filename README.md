@@ -19,24 +19,7 @@ HTML, CSS, and vanilla JavaScript. Hosted on GitHub Pages with automated
 deployment through GitHub Actions. No framework, site dependencies, or build
 step is required.
 
-## Run locally
-
-With Node.js 22 or later:
-
-```sh
-git clone https://github.com/Knight-RT/Knight-RT.github.io.git
-cd Knight-RT.github.io
-npm start
-```
-
-Open [http://127.0.0.1:8000](http://127.0.0.1:8000). You can also start the server
-directly with `node scripts/serve.mjs`.
-
-## Content and maintenance
-
-Personal details and project highlights are maintained in `public/profile.js`.
-The page structure, styling, and interactions live in `public/index.html`,
-`public/styles.css`, and `public/app.js`.
+## Quality and updates
 
 Independent [Playwright tests](https://github.com/Knight-RT/Ryan-Portfolio-tests)
 check the site’s behaviour on pull requests. Passing checks are required before
