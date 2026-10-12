@@ -34,7 +34,7 @@ repositories or public demos become available.
 
 `public/index.html` defines the six sections; `styles.css` defines the responsive
 layout. `app.js` renders the profile and GitHub cards, manages a tab-session
-dark mode, and shows back-to-top once the hero has scrolled out of view.
+dark mode (dark by default in a fresh session), and shows back-to-top once the hero has scrolled out of view.
 
 GitHub requests are unauthenticated; failures, empty responses, and nullable
 repository fields have separate states. Dynamic text uses DOM textContent.

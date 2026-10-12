@@ -24,7 +24,7 @@ jobs:
         with:
           repository: Knight-RT/Ryan-Portfolio-tests
           # Review SPEC.md and test changes before updating this immutable pin.
-          ref: 4f6bb59e0b8c6dce1732ecde013a9b4069593bfe
+          ref: 126b45fe451c99ffbebbc84e7383cce094136d24
           path: checker
           persist-credentials: false
       - uses: actions/setup-node@v4
