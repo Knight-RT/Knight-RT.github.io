@@ -128,7 +128,7 @@ class MarbleRenderer {
       const [x, y] = screen(f.x, f.y), r = (f.king ? 10 : 6) * zoom;
       c.fillStyle = '#30231f28'; c.beginPath(); c.ellipse(x + 3, y + r * .65, r + 2, r * .5, 0, 0, Math.PI * 2); c.fill();
       c.fillStyle = b.teams[f.team].color; c.strokeStyle = '#302b24'; c.lineWidth = 2; c.beginPath(); c.arc(x, y, r, 0, Math.PI * 2); c.fill(); c.stroke();
-      // Sword angle follows movement; the short swing is triggered by an actual strike.
+      // The drawn blade uses the same rotating angle and reach as combat detection.
       c.save(); c.translate(x, y); c.rotate(f.angle);
       c.fillStyle = '#f5f2df'; c.strokeStyle = '#302b24'; c.lineWidth = 1.5; c.beginPath(); c.moveTo(r, -2); c.lineTo(r + 8 * zoom, -2); c.lineTo(r + 10 * zoom, 0); c.lineTo(r + 8 * zoom, 2); c.lineTo(r, 2); c.closePath(); c.fill(); c.stroke();
       c.fillStyle = '#a87b35'; c.fillRect(r + 1, -6, 3, 12); c.fillStyle = '#4b3527'; c.fillRect(r - 5, -2, 6, 4); c.restore();

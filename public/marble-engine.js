@@ -29,7 +29,11 @@
       f.xp -= t.xp; f.level++;
       let perk;
       if (f.level % 3 === 2) { const gain = Math.ceil(t.health * .25); f.maxHp += gain; f.hp += gain; perk = `+${gain} health`; }
-      else if (f.level % 3 === 0) { f.speed += t.movement * .1; perk = '+10% base speed'; }
+      else if (f.level % 3 === 0) {
+        const previousSpeed = f.speed; f.speed += t.movement * .1;
+        if (f.encounter !== null && previousSpeed > 0) { f.vx *= f.speed / previousSpeed; f.vy *= f.speed / previousSpeed; }
+        perk = '+10% base speed';
+      }
       else { f.attack += Math.max(1, Math.ceil(t.attack * .2)); f.armor += 2; f.equipment = `Arms tier ${Math.floor(f.level / 3)}`; perk = 'upgraded weapon and armor'; }
       this.log(`${t.name} ${f.king ? 'king' : 'fighter #' + f.id} reached level ${f.level}: ${perk}.`);
     }
@@ -89,6 +93,8 @@
         const room=this.encounters.find(room=>room.id===f.encounter);
         if (room) {
           // Ballistic motion: no enemy coordinates enter velocity or heading calculations.
+          const velocity = Math.hypot(f.vx, f.vy);
+          if (velocity > f.speed && velocity > 0) { f.vx *= f.speed / velocity; f.vy *= f.speed / velocity; }
           f.angle += f.spin*dt;
           f.x+=f.vx*dt; f.y+=f.vy*dt;
           const radius=f.king?10:6, left=room.x-room.halfWidth+radius, right=room.x+room.halfWidth-radius, top=room.y-room.halfHeight+radius, bottom=room.y+room.halfHeight-radius;
@@ -129,7 +135,11 @@
           const nx = d ? dx / d : Math.cos(a.id * 2.39996), ny = d ? dy / d : Math.sin(a.id * 2.39996), push = (radius - d) * .25;
           const ca = corrections.get(a.id), cb = corrections.get(b.id); ca.x -= nx * push; ca.y -= ny * push; cb.x += nx * push; cb.y += ny * push;
           const closing = (b.vx - a.vx) * nx + (b.vy - a.vy) * ny;
-          if (closing < 0) { a.vx += closing * nx * (a.encounter ? .98 : .5); a.vy += closing * ny * (a.encounter ? .98 : .5); b.vx -= closing * nx * .5; b.vy -= closing * ny * .5; }
+          if (closing < 0) {
+            const impulse = closing * (a.encounter ? .98 : .5);
+            a.vx += impulse * nx; a.vy += impulse * ny;
+            b.vx -= impulse * nx; b.vy -= impulse * ny;
+          }
         }
       }
       for (const f of this.fighters) { const correction = corrections.get(f.id), length = Math.hypot(correction.x, correction.y), scale = length ? Math.min(1, 30 * dt / length) : 0; f.x += correction.x * scale; f.y += correction.y * scale; }
